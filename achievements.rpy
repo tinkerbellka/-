@@ -2,26 +2,16 @@ define myconfig.INGAME_POPUP_WITH_STEAM = True
 
 define myconfig.ACHIEVEMENT_HIDE_TIME = 1.0
 
-## True if the game should show in-game achievement popups when an
-## achievement is earned. You can set this to False if you just want an
-## achievement gallery screen and don't want any popups.
+
 define myconfig.SHOW_ACHIEVEMENT_POPUPS = True
-## This can be set to a sound that plays when the achievement popup appears.
-## None does not play a sound.
+
 define myconfig.ACHIEVEMENT_SOUND = None # "audio/sfx/achievement.ogg"
-## If the sound plays, this sets the channel it will play on. The audio
-## channel plays on the sfx mixer, and can play overlapping sounds if multiple
-## achievements are earned at once.
+
 define myconfig.ACHIEVEMENT_CHANNEL = "audio"
 
 
 
 init python:
-    ## This is a built-in configuration value. It will set the position of
-    ## the Steam popup. You can change this to any of the following:
-    ## "top_left", "top_right", "bottom_left", "bottom_right"
-    ## You may want to use this to ensure any Steam notifications don't conflict
-    ## with the position of the built-in notification, if you're using both.
     achievement.steam_position = None
 
 
