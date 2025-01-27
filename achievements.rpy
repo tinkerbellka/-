@@ -5,7 +5,7 @@ define myconfig.ACHIEVEMENT_HIDE_TIME = 1.0
 
 define myconfig.SHOW_ACHIEVEMENT_POPUPS = True
 
-define myconfig.ACHIEVEMENT_SOUND = None # "audio/sfx/achievement.ogg"
+define myconfig.ACHIEVEMENT_SOUND = None 
 
 define myconfig.ACHIEVEMENT_CHANNEL = "audio"
 
