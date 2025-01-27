@@ -34,7 +34,6 @@ screen achievement_popup(a, tag, num):
 
     frame:
         style_prefix 'achieve_popup'
-        ## The transform that makes it pop out
         at achievement_popout()
         yoffset achievement_yoffset
         has hbox
