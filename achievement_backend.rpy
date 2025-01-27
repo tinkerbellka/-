@@ -1,13 +1,11 @@
-
 init -50 python:
     import datetime, time
     from re import sub as re_sub
 
     TAG_ALPHABET = "abcdefghijklmnopqrstuvwxyz"
     def get_random_screen_tag(k=4):
-        """Generate a random k-letter word out of alphabet letters."""
-
-        # Shuffle the list and pop k items from the front
+       
+       
         alphabet = list(store.TAG_ALPHABET)
         renpy.random.shuffle(alphabet)
         ## Add the time onto the end so there are no duplicates
@@ -15,55 +13,7 @@ init -50 python:
 
 
     class Achievement():
-        """
-        A class with information on in-game achievements which can be extended
-        to use with other systems (e.g. Steam achievements).
-
-        Attributes:
-        -----------
-        name : string
-            The human-readable name of this achievement. May have spaces,
-            apostrophes, dashes, etc.
-        id : string
-            The code-friendly name of this achievement (which can be used for
-            things like the Steam backend). Should only include letters,
-            numbers, and underscores. If not provided, name will be sanitized
-            for this purpose.
-        description : string
-            A longer description for this achievement. Optional.
-        unlocked_image : Displayable
-            A displayable to use when this achievement is unlocked.
-        locked_image : Displayable
-            A displayable to use when this achievement is locked. If not
-            provided, requires an image named "locked_achievement" to be
-            declared somewhere.
-        stat_max : int
-            If provided, an integer corresponding to the maximum progress of
-            an achievement, if the achievement can be partially completed
-            (e.g. your game has 24 chapters and you want this to tick up
-            after every chapter, thus, stat_max is 24). The achievement is
-            unlocked when it reaches this value.
-        stat_progress : int
-            The current progress for the stat.
-        stat_modulo : int
-            The formula (stat_progress % stat_modulo) is applied whenever
-            achievement progress is updated. If the result is 0, the
-            progress is shown to the user. By default this is 0 so all updates
-            to stat_progress are shown. Useful if, for the supposed 24-chapter
-            game progress stat, you only wanted to show updates every time the
-            player got through a quarter of the chapters. In this case,
-            stat_modulo would be 6 (24//4).
-        hidden : bool
-            True if this achievement's description and name should be hidden
-            from the player.
-        hide_description : bool
-            True if this achievement's description should be hidden from the
-            player. Can be set separately from hidden, e.g. with hidden=True
-            and hide_description=False, the player will see the name but not
-            the description.
-        timestamp : Datetime
-            The time this achievement was unlocked at.
-        """
+        
         ## A list of all the achievements that exist in this game,
         ## to loop over in the achievements screen.
         all_achievements = [ ]
@@ -106,10 +56,7 @@ init -50 python:
                 stat_modulo=stat_modulo or None)
 
         def get_timestamp(self, format="%b %d, %Y @ %I:%M %p"):
-            """
-            Return the timestamp when this achievement was granted,
-            using the provided string format.
-            """
+        
             if self.has():
                 return datetime.datetime.fromtimestamp(
                     self._timestamp).strftime(format)
@@ -125,7 +72,6 @@ init -50 python:
 
         @property
         def timestamp(self):
-            """Return the timestamp when this achievement was granted."""
             if self.has():
                 try:
                     ts = datetime.datetime.fromtimestamp(self._timestamp)
@@ -146,7 +92,7 @@ init -50 python:
 
         @property
         def idle_img(self):
-            """Return the idle image based on its locked status."""
+            
             if self.has():
                 return self.unlocked_image
             else:
@@ -154,10 +100,7 @@ init -50 python:
 
         @property
         def name(self):
-            """
-            Returns the name of the achievement based on whether it's
-            hidden or not.
-            """
+           
             if self.hidden and not self.has():
                 return _("???{#hidden_achievement_name}")
             else:
@@ -165,10 +108,7 @@ init -50 python:
 
         @property
         def description(self):
-            """
-            Returns the description of the achievement based on whether it's
-            hidden or not.
-            """
+           
             if self.hide_description and not self.has():
                 if self.hide_description is True:
                     return _("???{#hidden_achievement_description}")
@@ -179,16 +119,12 @@ init -50 python:
 
         @property
         def stat_progress(self):
-            """Return this achievement's progress stat."""
             return self.get_progress()
 
         def add_progress(self, amount=1):
-            """
-            Increment the progress towards this achievement by amount.
-            """
             self.progress(min(self.stat_progress+amount, self.stat_max))
 
-        ## Wrappers for various achievement functionality
+       
         def clear(self):
             """Clear this achievement from memory."""
             return achievement.clear(self.id)
