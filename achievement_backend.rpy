@@ -1,21 +1,4 @@
-################################################################################
-##
-## Achievements for Ren'Py by Feniks (feniksdev.itch.io / feniksdev.com)
-##
-################################################################################
-## This file contains code for an achievement system in Ren'Py. It is designed
-## as a wrapper to the built-in achievement system, so it hooks into the
-## Steam backend as well if you set up your achievement IDs the same as in
-## the Steam backend.
-##
-## If you use this code in your projects, credit me as Feniks @ feniksdev.com
-##
-## If you'd like to see how to use this tool, check the other file,
-## achievements.rpy!
-##
-## Leave a comment on the tool page on itch.io or an issue on the GitHub
-## if you run into any issues.
-################################################################################
+
 init -50 python:
     import datetime, time
     from re import sub as re_sub
