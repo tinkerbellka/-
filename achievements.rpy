@@ -29,15 +29,13 @@ screen achievement_popup(a, tag, num):
 
     zorder 190
 
-    ## Allows multiple achievements to be slightly offset from each other.
-    ## This number should be at least as tall as one achievement.
+   
     default achievement_yoffset = num*170
 
     frame:
         style_prefix 'achieve_popup'
         ## The transform that makes it pop out
         at achievement_popout()
-        ## Offsets the achievement down if there are multiple
         yoffset achievement_yoffset
         has hbox
         add a.unlocked_image:
