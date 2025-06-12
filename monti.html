@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Монти Холл</title>
+  <link rel="stylesheet" href="monti.css" />
+</head>
+<body>
+  <h1>Выберите дверь!</h1>
+  <div class="game">
+    <div class="doors">
+      <div class="door" data-id="1"></div>
+      <div class="door" data-id="2"></div>
+      <div class="door" data-id="3"></div>
+    </div>
+
+    <div class="step-2" style="display: none;">
+      <p>Хотите изменить выбор?</p>
+      <button id="keep" class="switch-btn">Оставить выбор</button>
+      <button id="change" class="switch-btn">Сменить дверь</button>
+    </div>
+
+    <div class="result" style="display: none;">
+      <div class="doors">
+        <div class="door-result" data-id="1"></div>
+        <div class="door-result" data-id="2"></div>
+        <div class="door-result" data-id="3"></div>
+      </div>
+      <p class="message">
+        <span class="win">🚗 Вы выиграли авто!</span>
+        <span class="lose">🐐 Увы, вы выбрали козу.</span>
+      </p>
+      <a href="" class="again">🔄 Сыграть снова</a>
+    </div>
+  </div>
+
+  <script>
+    const doors = document.querySelectorAll('.door');
+    const doorResults = document.querySelectorAll('.door-result');
+    const step2 = document.querySelector('.step-2');
+    const result = document.querySelector('.result');
+    const messageWin = document.querySelector('.win');
+    const messageLose = document.querySelector('.lose');
+
+    let prizeDoor = Math.floor(Math.random() * 3) + 1;
+    let userChoice = null;
+    let revealedGoat = null;
+
+    doors.forEach(door => {
+      door.addEventListener('click', () => {
+        if (userChoice !== null) return;
+
+        userChoice = +door.dataset.id;
+        door.classList.add('selected');
+
+
+        const options = [1, 2, 3].filter(d => d !== userChoice && d !== prizeDoor);
+        revealedGoat = options[Math.floor(Math.random() * options.length)];
+        document.querySelector(`.door[data-id="${revealedGoat}"]`).classList.add('goat');
+
+        step2.style.display = 'block';
+      });
+    });
+
+    document.getElementById('keep').addEventListener('click', () => {
+      showResult(userChoice);
+    });
+
+    document.getElementById('change').addEventListener('click', () => {
+      const newChoice = [1, 2, 3].find(d => d !== userChoice && d !== revealedGoat);
+      showResult(newChoice);
+    });
+
+    function showResult(finalChoice) {
+      step2.style.display = 'none';
+      result.style.display = 'flex';
+
+      doorResults.forEach(door => {
+        const id = +door.dataset.id;
+        if (id === prizeDoor) {
+          door.classList.add('car');
+        } else {
+          door.classList.add('goat');
+        }
+      });
+
+      if (finalChoice === prizeDoor) {
+        messageWin.style.display = 'inline';
+      } else {
+        messageLose.style.display = 'inline';
+      }
+    }
+
+    console.log("Машина за дверью №" + prizeDoor);
+  </script>
+</body>
+</html>
